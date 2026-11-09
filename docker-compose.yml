@@ -1,0 +1,12 @@
+# Single-container deploy: OAuth token refresh + SQLite + async poll loop.
+# No ports, no dependencies — state lives in ./data/watcher.db.
+services:
+  spotify-watcher:
+    build: .
+    image: spotify-playlist-watcher:local
+    container_name: spotify-playlist-watcher
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
